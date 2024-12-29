@@ -137,7 +137,7 @@ class ThresholdAD(_NonTrainableUnivariateDetector):
     def _predict_core(self, s: pd.Series) -> pd.Series:
         predicted = (
             s > (self.high if (self.high is not None) else float("inf"))
-        ) | (s < (self.low if (self.low is not None) else -float("inf")))
+        ) | (s < (self.low if (self.low is not None) else -float("inf"))).astype('boolean')
         predicted[s.isna()] = np.nan
         return predicted
 
@@ -266,7 +266,7 @@ class InterQuartileRangeAD(_TrainableUnivariateDetector):
         )
 
     def _predict_core(self, s: pd.Series) -> pd.Series:
-        predicted = (s > self.abs_high_) | (s < self.abs_low_)
+        predicted = (s > self.abs_high_).astype('boolean') | (s < self.abs_low_).astype('boolean')
         predicted[s.isna()] = np.nan
         return predicted
 
