@@ -161,7 +161,7 @@ def validate_events(
     merged_event_list = (
         []
     )  # type: List[Union[Tuple[pd.Timestamp, pd.Timestamp], pd.Timestamp]]
-    for t, v in time_window_end_series.iteritems():  # type: pd.Timestamp, int
+    for t, v in time_window_end_series.items():  # type: pd.Timestamp, int
         if (status == 0) and (v > 0):
             start = t  # type: pd.Timestamp
             status = 1
